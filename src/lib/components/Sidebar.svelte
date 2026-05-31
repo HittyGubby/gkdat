@@ -13,12 +13,38 @@
 
   export let allProvinces: string[];
 
+  const pinyinSort = new Intl.Collator("zh-CN").compare;
+  $: sortedProvinces = [...allProvinces].sort(pinyinSort);
+
   const dispatch = createEventDispatcher<{ close: void }>();
 
   const PROVINCE_NOTES: Record<string, string> = {
-    浙江: "（3+3模式）",
-    山东: "（3+3模式）",
-    海南: "（3+3模式）",
+    浙江: "（一卷/3+3模式）",
+    山东: "（一卷/3+3模式）",
+    海南: "（二卷/3+3模式）",
+    安徽: "（一卷）",
+    江苏: "（一卷）",
+    河北: "（一卷）",
+    河南: "（一卷）",
+    福建: "（一卷）",
+    江西: "（一卷）",
+    湖北: "（一卷）",
+    湖南: "（一卷）",
+    广东: "（一卷）",
+    重庆: "（二卷）",
+    贵州: "（二卷）",
+    广西: "（二卷）",
+    甘肃: "（二卷）",
+    四川: "（二卷）",
+    云南: "（二卷）",
+    辽宁: "（二卷）",
+    吉林: "（二卷）",
+    黑龙江: "（二卷）",
+    内蒙古: "（二卷）",
+    陕西: "（二卷）",
+    青海: "（二卷）",
+    宁夏: "（二卷）",
+    山西: "（二卷）",
   };
 
   function toggleProvince(province: string) {
@@ -30,7 +56,7 @@
   }
 
   function selectAll() {
-    selectedProvinces.set([...allProvinces]);
+    selectedProvinces.set([...sortedProvinces]);
   }
 
   function deselectAll() {
@@ -40,7 +66,7 @@
   function invertSelection() {
     selectedProvinces.update((list) => {
       const set = new Set(list);
-      return allProvinces.filter((p) => !set.has(p));
+      return sortedProvinces.filter((p) => !set.has(p));
     });
   }
 
@@ -107,7 +133,7 @@
       <div
         class="max-h-[200px] overflow-y-auto space-y-0.5 mb-2 border border-dark-border rounded bg-dark-card"
       >
-        {#each allProvinces as province (province)}
+        {#each sortedProvinces as province (province)}
           <label
             class="flex items-center gap-2 px-2.5 py-1 text-sm cursor-pointer hover:bg-white/5 transition-colors"
           >
@@ -122,7 +148,7 @@
             >
           </label>
         {/each}
-        {#if allProvinces.length === 0}
+        {#if sortedProvinces.length === 0}
           <p class="px-2.5 py-2 text-xs text-gray-500">加载中…</p>
         {/if}
       </div>

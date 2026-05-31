@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import type { RawData, ProvinceProcessed } from "$lib/types";
   import { preprocessData } from "$lib/data";
+  import { base } from "$app/paths";
   import { selectedProvinces } from "$lib/stores";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Chart from "$lib/components/Chart.svelte";
@@ -15,7 +16,7 @@
 
   onMount(async () => {
     try {
-      const resp = await fetch("/gkdat.json");
+      const resp = await fetch(`${base}/gkdat.json`);
       const raw: RawData = await resp.json();
       allData = preprocessData(raw);
       allProvinces = Object.keys(allData).sort();
