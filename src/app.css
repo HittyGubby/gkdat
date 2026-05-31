@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+	}
+}
+
+@layer components {
+	.sidebar-section {
+		@apply border-b border-dark-border pb-4 mb-4;
+	}
+
+	.sidebar-section:last-child {
+		@apply border-b-0 pb-0 mb-0;
+	}
+
+	.sidebar-label {
+		@apply text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block;
+	}
+
+	.control-btn {
+		@apply px-2.5 py-1 text-xs rounded-md border border-dark-border bg-dark-card hover:bg-dark-border transition-colors cursor-pointer;
+	}
+
+	.control-btn.active {
+		@apply bg-blue-600 border-blue-500 text-white;
+	}
+
+	.stat-card {
+		@apply bg-dark-card border border-dark-border rounded-lg p-4 transition-all cursor-pointer hover:border-blue-500;
+	}
+
+	.stat-card.highlighted {
+		@apply border-blue-500 ring-1 ring-blue-500/30;
+	}
+}
